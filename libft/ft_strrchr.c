@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmatime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/06 16:48:38 by salibert          #+#    #+#             */
-/*   Updated: 2016/11/11 15:11:38 by salibert         ###   ########.fr       */
+/*   Created: 2016/11/14 11:53:59 by mmatime           #+#    #+#             */
+/*   Updated: 2016/11/22 15:00:45 by mmatime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strrchr(const char *s, int c)
+char	*ft_strrchr(const char *s, int c)
 {
-	size_t	len_s;
-
-	len_s = ft_strlen(s);
-	while (len_s != 0)
+	while (*s)
+		s++;
+	if ((unsigned char)c == '\0')
+		return ((char *)s);
+	s--;
+	while (*s)
 	{
-		if (s[len_s] == c)
-			return ((char*)s + len_s);
-		len_s--;
+		if (*s == (unsigned char)c)
+			return ((char *)s);
+		s--;
 	}
-	if (s[len_s] == c)
-		return ((char*)s + len_s);
-	return (0);
+	return (NULL);
 }

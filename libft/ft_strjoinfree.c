@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoinf.c                                      :+:      :+:    :+:   */
+/*   ft_strjoinfree.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmatime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/14 14:49:01 by salibert          #+#    #+#             */
-/*   Updated: 2016/12/05 10:18:25 by salibert         ###   ########.fr       */
+/*   Created: 2017/01/30 14:41:04 by mmatime           #+#    #+#             */
+/*   Updated: 2017/01/30 14:57:54 by mmatime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,40 @@
 
 static void		ft_free(char *s1, char *s2, char c)
 {
-	if (c == 'L')
+	if (c == 'E')
 		ft_strdel(&s1);
-	if (c == 'R')
+	if (c == 'F')
 		ft_strdel(&s2);
-	if (c == 'B')
+	if (c == 'G')
 	{
 		ft_strdel(&s1);
 		ft_strdel(&s2);
 	}
 }
 
-char			*ft_strjoinf(char const *s1, const char *s2, char c)
+char			*ft_strjoinfree(char const *s1, char const *s2, char c)
 {
-	char		*str;
-	size_t		i;
-	size_t		j;
+	char	*dest;
+	int 	i;
+	int		j;
 
 	i = 0;
 	j = 0;
-	if (!(str = (char *)malloc(sizeof(str) * (ft_strlen(s1)
-		+ ft_strlen(s2) + 1))))
+	dest = (char*)malloc(sizeof(dest) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!dest)
 		return (NULL);
 	while (s1[i])
 	{
-		str[i] = s1[i];
+		dest[i] = s1[i];
 		i++;
 	}
 	while (s2[j])
 	{
-		str[i] = s2[j];
+		dest[i] = s2[j];
 		i++;
 		j++;
 	}
-	str[i] = '\0';
+	dest[i] = '\0';
 	ft_free((char*)s1, (char*)s2, c);
-	return (str);
+	return (dest);
 }

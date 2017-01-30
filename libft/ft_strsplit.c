@@ -3,56 +3,76 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strsplit.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmatime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 14:35:00 by salibert          #+#    #+#             */
-/*   Updated: 2016/11/14 12:07:42 by salibert         ###   ########.fr       */
+/*   Created: 2016/11/19 23:08:05 by mmatime           #+#    #+#             */
+/*   Updated: 2016/11/20 00:20:18 by mmatime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int		ft_nbwords(char const *s, char c)
+static	int		count_letters(char const *str, char c)
 {
-	size_t		nb;
+	int	i;
+	int count;
 
-	nb = 0;
-	while (*s && s)
+	i = 0;
+	count = 0;
+	while (str[i])
 	{
-		while (*s == c)
-			s++;
-		if (*s)
-			nb++;
-		while (*s && *s != c)
-			s++;
+		if (str[i] != c)
+			count++;
+		i++;
 	}
-	return (nb);
+	return (count);
+}
+
+static	int		count_words(char const *s, char c)
+{
+	int i;
+	int count;
+
+	i = 0;
+	count = 0;
+	while (s[i])
+	{
+		while (s[i] && s[i] == c)
+			i++;
+		while (s[i] && s[i] != c)
+			i++;
+		count++;
+	}
+	if (s[i - 1] == c && count)
+		count--;
+	return (count);
 }
 
 char			**ft_strsplit(char const *s, char c)
 {
-	char		**str;
-	size_t		tmp;
-	size_t		i;
-	size_t		words;
+	char	**tab;
+	int		i;
+	int		j;
+	int		k;
 
+	i = 0;
+	k = 0;
 	if (!s)
 		return (NULL);
-	i = 0;
-	words = ft_nbwords(s, c);
-	if (!(str = (char **)malloc(sizeof(char *) * (words + 1))))
+	tab = (char **)malloc(sizeof(*tab) * (count_words(s, c) + 1));
+	if (!tab)
 		return (NULL);
-	str[words] = NULL;
-	words = 0;
-	while (s[i])
+	while (i < (count_words(s, c)))
 	{
-		while (s[i] == c)
-			i++;
-		tmp = i;
-		while (s[i] && s[i] != c)
-			i++;
-		if (tmp < i)
-			str[words++] = ft_strsub((s + tmp), 0, (i - tmp));
+		j = 0;
+		tab[i] = (char*)malloc(sizeof(char) * (count_letters(&s[k], c) + 1));
+		while (s[k] == c)
+			k++;
+		while (s[k] && s[k] != c)
+			tab[i][j++] = s[k++];
+		tab[i][j] = '\0';
+		i++;
 	}
-	return (str);
+	tab[i] = NULL;
+	return (tab);
 }

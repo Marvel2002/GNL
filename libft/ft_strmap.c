@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmatime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 10:33:24 by salibert          #+#    #+#             */
-/*   Updated: 2016/11/13 16:15:17 by salibert         ###   ########.fr       */
+/*   Created: 2016/11/16 16:13:12 by mmatime           #+#    #+#             */
+/*   Updated: 2016/11/19 22:57:47 by mmatime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strmap(char const *s, char (*f)(char))
+char	*ft_strmap(char const *s, char (*f)(char))
 {
+	int		i;
 	char	*str;
-	size_t	i;
-	size_t	len;
 
-	if (!(s))
+	i = 0;
+	if (!s)
+		return (NULL);
+	while (s[i])
+		i++;
+	str = (char *)malloc(sizeof(char) * (i + 1));
+	if (!str)
 		return (NULL);
 	i = 0;
-	len = ft_strlen(s) + 1;
-	if (!(str = (char *)malloc(sizeof(*str) * (len))))
-		return (NULL);
 	while (s[i])
 	{
 		str[i] = f(s[i]);

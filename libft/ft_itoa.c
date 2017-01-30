@@ -3,67 +3,50 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmatime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 15:03:13 by salibert          #+#    #+#             */
-/*   Updated: 2016/11/18 17:28:57 by salibert         ###   ########.fr       */
+/*   Created: 2016/11/19 22:18:49 by mmatime           #+#    #+#             */
+/*   Updated: 2016/11/20 01:53:55 by mmatime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static size_t	ft_size(int n)
+static char		*ft_backslach(char *src, char *dst, int i, int tmp)
 {
-	size_t		i;
-
-	i = 1;
-	if (n == 0)
-		return (2);
-	if (n < 0)
-		n *= -1;
-	while (n > 0)
+	while (--i >= 0)
 	{
-		n /= 10;
-		i++;
+		dst[tmp] = src[i];
+		tmp++;
 	}
-	return (i);
-}
-
-static char		*ft_overflow(void)
-{
-	char		*nb;
-
-	if (!(nb = (char*)malloc(sizeof(*nb) * (12))))
-		return (NULL);
-	nb = ft_strdup("-2147483648");
-	return (nb);
+	dst[tmp] = '\0';
+	return (dst);
 }
 
 char			*ft_itoa(int n)
 {
-	size_t		i;
-	size_t		sign;
-	char		*nb;
+	char	*str;
+	char	buf[12];
+	int		i;
+	int		n_tmp;
 
-	sign = 0;
+	i = 0;
+	n_tmp = n;
 	if (n == -2147483648)
-		return (ft_overflow());
-	i = ft_size(n);
+		return (ft_strdup("-2147483648"));
+	else if (n == 0)
+		return (ft_strdup("0"));
 	if (n < 0)
+		n_tmp = -n;
+	while (n_tmp)
 	{
-		i = i + 1;
-		sign = 1;
-		n *= -1;
+		buf[i++] = n_tmp % 10 + '0';
+		n_tmp /= 10;
 	}
-	if (!(nb = (char*)malloc(sizeof(*nb) * i)))
+	if (n < 0)
+		buf[i++] = '-';
+	if (!(str = (char *)malloc(sizeof(char) * (i + 1))))
 		return (NULL);
-	nb[--i] = '\0';
-	while (i)
-	{
-		nb[--i] = (n % 10) + 48;
-		n /= 10;
-	}
-	if (sign == 1)
-		nb[0] = '-';
-	return (nb);
+	ft_backslach(buf, str, i, n_tmp);
+	return (str);
 }

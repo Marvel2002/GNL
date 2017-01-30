@@ -3,37 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmatime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/08 12:43:10 by salibert          #+#    #+#             */
-/*   Updated: 2016/11/13 17:31:55 by salibert         ###   ########.fr       */
+/*   Created: 2016/11/16 17:49:53 by mmatime           #+#    #+#             */
+/*   Updated: 2016/11/19 23:22:14 by mmatime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char		*ft_strtrim(char const *s)
+char	*ft_strtrim(char const *s)
 {
-	size_t	i;
-	char	*new;
-	size_t	a;
-	size_t	z;
+	int		i;
+	int		buf;
+	int		new;
+	char	*dest;
 
+	i = 0;
+	buf = 0;
+	new = 0;
 	if (!s)
 		return (NULL);
-	if (ft_strlen(s) == 0)
-		return ((char*)malloc(sizeof(*new) * (0)));
-	i = 0;
-	while (s[i] == ' ' || s[i] == '\t' || s[i] == '\n')
+	while (s[i] && (s[i] == ' ' || s[i] == '\n' || s[i] == '\t'))
 		i++;
 	if (s[i] == '\0')
-		return ((ft_strsub(s, 0, 0)));
-	a = i;
+		return (ft_strdup(""));
+	buf = i;
 	while (s[i])
 		i++;
-	while (s[i] == ' ' || s[i] == '\0' || s[i] == '\t' || s[i] == '\n')
+	while ((s[i - 1] == ' ') || (s[i - 1] == '\t') || (s[i - 1] == '\n'))
 		i--;
-	z = i;
-	new = ft_strsub(s, a, (z - a + 1));
-	return (new);
+	if (!(dest = (char *)malloc(sizeof(char) * ((i - buf) + 1))))
+		return (NULL);
+	while (s[buf] && buf < i)
+		dest[new++] = s[buf++];
+	dest[new] = '\0';
+	return (dest);
 }

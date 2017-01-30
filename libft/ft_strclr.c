@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strclr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: salibert <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mmatime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/11/07 15:57:34 by salibert          #+#    #+#             */
-/*   Updated: 2016/11/13 16:17:14 by salibert         ###   ########.fr       */
+/*   Created: 2016/11/16 16:02:35 by mmatime           #+#    #+#             */
+/*   Updated: 2016/11/16 16:03:51 by mmatime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 void	ft_strclr(char *s)
 {
-	if (s)
-		ft_memset(s, 0, ft_strlen(s));
+	int i;
+
+	i = 0;
+	if (!s)
+		return ;
+	while (s[i])
+	{
+		s[i] = '\0';
+		i++;
+	}
 }
