@@ -20,8 +20,10 @@ int		ft_line(char **all, char **line)
 
 	if (*all && ft_strcmp(*all, "") && (tmp = ft_strchr(*all, '\n')))
 	{
+		printf("strcmp est >%d\n<", ft_strcmp(*all, ""));
 		n = tmp - *all;
-		printf(">>>>>>>>>ALL = %s<<<<<<<<\n", all);
+		printf("n = >%d\n<", n);
+		printf("tmp = >%s\n<", tmp);
 		printf(">>>>>>>>>>>COUCOU n = %d<<<<<<<<<\n", n);
 		tmp = ft_strdup(tmp);
 		*line = ft_strsub(*all, 0, n);
@@ -32,6 +34,7 @@ int		ft_line(char **all, char **line)
 	}
 	else if (*all && ft_strcmp(*all, "") && !ft_strchr(*all, '\n'))
 	{
+		printf(">>>>>>>>>>>COUCOU22 <<<<<<<<<\n");
 		*line = ft_strdup(*all);
 		ft_strdel(all);
 		return (1);

@@ -19,7 +19,8 @@ int		main(int argc, char **argv)
 	char *line = NULL;
 
 	fd = open(argv[1], O_RDONLY);
+	
 	printf("%d\n", get_next_line(fd, &line));
-	printf("%s", line);
+	printf("%d\n", get_next_line(fd, &line));
 	return (0);
 }
