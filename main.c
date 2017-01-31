@@ -22,5 +22,7 @@ int		main(int argc, char **argv)
 	
 	printf("%d\n", get_next_line(fd, &line));
 	printf("%d\n", get_next_line(fd, &line));
+	printf("%d\n", get_next_line(fd, &line));
+	printf("%d\n", get_next_line(fd, &line));
 	return (0);
 }
