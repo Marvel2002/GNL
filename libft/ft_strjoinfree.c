@@ -6,7 +6,7 @@
 /*   By: mmatime <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/01/30 14:41:04 by mmatime           #+#    #+#             */
-/*   Updated: 2017/01/30 14:57:54 by mmatime          ###   ########.fr       */
+/*   Updated: 2017/02/01 18:19:28 by mmatime          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void		ft_free(char *s1, char *s2, char c)
 char			*ft_strjoinfree(char const *s1, char const *s2, char c)
 {
 	char	*dest;
-	int 	i;
+	int		i;
 	int		j;
 
 	i = 0;
